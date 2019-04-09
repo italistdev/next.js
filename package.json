@@ -28,6 +28,7 @@
     "next": "./dist/bin/next"
   },
   "scripts": {
+    "prepare": "npm run release",
     "build": "taskr",
     "release": "taskr release",
     "pretestonly": "taskr pretest",
