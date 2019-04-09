@@ -11,7 +11,7 @@ export default function ({ app }, suiteName, render, fetch) {
   describe(suiteName, () => {
     test('renders a stateless component', async () => {
       const html = await render('/stateless')
-      expect(html.includes('<meta charSet="utf-8" class="next-head"/>')).toBeTruthy()
+      expect(html.includes('<meta charSet="utf-8"/>')).toBeTruthy()
       expect(html.includes('My component!')).toBeTruthy()
     })
 
@@ -28,33 +28,33 @@ export default function ({ app }, suiteName, render, fetch) {
 
     test('header helper renders header information', async () => {
       const html = await (render('/head'))
-      expect(html.includes('<meta charSet="iso-8859-5" class="next-head"/>')).toBeTruthy()
-      expect(html.includes('<meta content="my meta" class="next-head"/>')).toBeTruthy()
+      expect(html.includes('<meta charSet="iso-8859-5"/>')).toBeTruthy()
+      expect(html.includes('<meta content="my meta"/>')).toBeTruthy()
       expect(html.includes('I can haz meta tags')).toBeTruthy()
     })
 
     test('header helper dedupes tags', async () => {
       const html = await (render('/head'))
-      expect(html).toContain('<meta charSet="iso-8859-5" class="next-head"/>')
-      expect(html).not.toContain('<meta charSet="utf-8" class="next-head"/>')
-      expect(html).toContain('<meta content="my meta" class="next-head"/>')
-      expect(html).toContain('<link rel="stylesheet" href="/dup-style.css" class="next-head"/><link rel="stylesheet" href="/dup-style.css" class="next-head"/>')
-      expect(html).toContain('<link rel="stylesheet" href="dedupe-style.css" class="next-head"/>')
-      expect(html).not.toContain('<link rel="stylesheet" href="dedupe-style.css" class="next-head"/><link rel="stylesheet" href="dedupe-style.css" class="next-head"/>')
+      expect(html).toContain('<meta charSet="iso-8859-5"/>')
+      expect(html).not.toContain('<meta charSet="utf-8"/>')
+      expect(html).toContain('<meta content="my meta"/>')
+      expect(html).toContain('<link rel="stylesheet" href="/dup-style.css"/><link rel="stylesheet" href="/dup-style.css"/>')
+      expect(html).toContain('<link rel="stylesheet" href="dedupe-style.css"/>')
+      expect(html).not.toContain('<link rel="stylesheet" href="dedupe-style.css"/><link rel="stylesheet" href="dedupe-style.css"/>')
     })
 
     test('header helper avoids dedupe of specific tags', async () => {
       const html = await (render('/head'))
-      expect(html).toContain('<meta property="article:tag" content="tag1" class="next-head"/>')
-      expect(html).toContain('<meta property="article:tag" content="tag2" class="next-head"/>')
-      expect(html).not.toContain('<meta property="dedupe:tag" content="tag3" class="next-head"/>')
-      expect(html).toContain('<meta property="dedupe:tag" content="tag4" class="next-head"/>')
+      expect(html).toContain('<meta property="article:tag" content="tag1"/>')
+      expect(html).toContain('<meta property="article:tag" content="tag2"/>')
+      expect(html).not.toContain('<meta property="dedupe:tag" content="tag3"/>')
+      expect(html).toContain('<meta property="dedupe:tag" content="tag4"/>')
     })
 
     test('header helper renders Fragment children', async () => {
       const html = await (render('/head'))
-      expect(html).toContain('<title class="next-head">Fragment title</title>')
-      expect(html).toContain('<meta content="meta fragment" class="next-head"/>')
+      expect(html).toContain('<title>Fragment title</title>')
+      expect(html).toContain('<meta content="meta fragment"/>')
     })
 
     it('should render the page with custom extension', async () => {

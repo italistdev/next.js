@@ -51,19 +51,7 @@ export default class HeadManager {
 
   updateElements (type, components) {
     const headEl = document.getElementsByTagName('head')[0]
-    const oldTags = Array.prototype.slice.call(headEl.querySelectorAll(type + '.next-head'))
-    const newTags = components.map(reactElementToDOM).filter((newTag) => {
-      for (let i = 0, len = oldTags.length; i < len; i++) {
-        const oldTag = oldTags[i]
-        if (oldTag.isEqualNode(newTag)) {
-          oldTags.splice(i, 1)
-          return false
-        }
-      }
-      return true
-    })
-
-    oldTags.forEach((t) => t.parentNode.removeChild(t))
+    const newTags = components.map(reactElementToDOM)
     newTags.forEach((t) => headEl.appendChild(t))
   }
 }
